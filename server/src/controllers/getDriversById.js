@@ -4,40 +4,48 @@ const URL = "http://localhost:5000/drivers"
 const { Driver, Team } = require("../db");
 
 const getDriversById = async (req, res) =>{
-    try{
-        const dbid = req.params.id;
-        const driverDB = await Driver.findOne({
-            where: {id: dbid},
-        });
-        const driverId = req.params.id;
-        const { data } =await axios.get(`${URL}/${driverId}`)
-        console.log(data)
-        const {id, name, image, dob, nationality, teams, description} = data;
-       
-        const drivers = {
-            id,
-            forename: name.forename,
-            surname: name.surname,
-            image:image.url,
-            dob,
-            nationality,
-            teams,
-            description,            
-        };
-        if(driverDB && drivers){
-            return res.status(200).json({driverDB, drivers})
-        }else if (driverDB){
-            return res.status(200).json(driverDB)
-        }else if (drivers){
-            return res.status(200).json(drivers)
+    try {
+        if(isNaN(req.params.id)){
+            const dbDriverById = await Driver.findByPk(req.params.id, {include: [{ model: Team, as: 'Teams' }]});
+            let teams = dbDriverById.Teams.map((team) => team.name); 
+           console.log(teams)
+            teams = teams.toString();
+    
+            const driver = 
+            {
+                id: dbDriverById.id,
+                forename: dbDriverById.name,
+                surname: dbDriverById.last_name,
+                image: dbDriverById.image,
+                dob: dbDriverById.birthdate,
+                nationality: dbDriverById.nationality,
+                teams: teams,
+                description: dbDriverById.description
+            };
+            return res.status(200).json(driver)   
         }else{
-            res.status(404).send("Not Found")
+            const driverId = req.params.id;
+            const { data } =await axios.get(`${URL}/${driverId}`)
+            console.log(data)
+            const {id, name, image, dob, nationality, teams, description} = data;
+           
+            const drivers = {
+                id,
+                forename: name.forename,
+                surname: name.surname,
+                image:image.url,
+                dob,
+                nationality,
+                teams,
+                description,            
+            };
+            return res.status(200).json(drivers)
         }
-    }catch (error){
+        
+        
+    } catch (error) {
         return res.status(400).send(error.message)
     }
-
 }
 
 module.exports = getDriversById
-    

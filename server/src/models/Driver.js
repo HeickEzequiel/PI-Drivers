@@ -4,8 +4,9 @@ module.exports = (sequelize) => {
   
   sequelize.define('Driver', {
     id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      unique: true,
       primaryKey: true
     },
     name: {
