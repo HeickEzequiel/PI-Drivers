@@ -1,6 +1,7 @@
 const { Driver , Team} = require("../db.js")
 
 const postDrivers = async (req, res) =>{
+    console.log(req.body)
     try{
         const {
             name,
@@ -20,7 +21,7 @@ const postDrivers = async (req, res) =>{
                     image,
                     nationality,
                     birthdate,
-                    
+                    teams
                 }
             })
             const bringTeams = await Team.findAll({
@@ -30,6 +31,7 @@ const postDrivers = async (req, res) =>{
             })
             const idTeams = bringTeams.map((Team)=>Team.id)
             const driverTeam = await newDriver[0].setTeams(idTeams)
+            
             newDriver.pop()
             const driverTeamObj = driverTeam.pop()
             
