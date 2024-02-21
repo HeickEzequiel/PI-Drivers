@@ -9,7 +9,7 @@ const getDrivers = async(req, res) => {
             ({id, name, image, dob, nationality, teams, description}) =>
             ({id, name, image, dob, nationality, teams, description})
         )
-        console.log(drivers[0].name)
+
         return drivers.length > 0 ? res.json(drivers) : res.status(404).send("Not Found")
     }
     catch(error){

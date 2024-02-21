@@ -1,7 +1,7 @@
 const { Driver , Team} = require("../db.js")
 
 const postDrivers = async (req, res) =>{
-    console.log(req.body)
+   
     try{
         const {
             name,

@@ -10,7 +10,7 @@ const getTeams = async(req, res) => {
             const { data } = await axios.get(`${URL}`)
             const teamsData = data      
             
-            console.log(teamsData[0].teams)
+            
             //////////////////lo convierto en array, los separo y los ordeno alfabeticamente//////////////////////////
             const teams = []
             for(let i = 0; teamsData.length > i; i++){

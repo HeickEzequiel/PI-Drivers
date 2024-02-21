@@ -8,7 +8,7 @@ const getDriversById = async (req, res) =>{
         if(isNaN(req.params.id)){
             const dbDriverById = await Driver.findByPk(req.params.id, {include: [{ model: Team, as: 'Teams' }]});
             let teams = dbDriverById.Teams.map((team) => team.name); 
-           console.log(teams)
+
             teams = teams.toString();
     
             const driver = 
@@ -26,7 +26,7 @@ const getDriversById = async (req, res) =>{
         }else{
             const driverId = req.params.id;
             const { data } =await axios.get(`${URL}/${driverId}`)
-            console.log(data)
+
             const {id, name, image, dob, nationality, teams, description} = data;
            
             const drivers = {
