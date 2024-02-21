@@ -10,8 +10,9 @@ function Search ({drvs}){
         <Card
           key={key}
           id={drv.id}
-          name={drv.name}
-          image={drv.image}
+          name={drv.name.forename}
+          last_name={drv.name.surname}
+          image={drv.image.url}
           dob={drv.dob}
           nationality={drv.nationality}
           teams={drv.teams}

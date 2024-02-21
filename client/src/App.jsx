@@ -38,7 +38,7 @@ function App() {
   function logout(){
     setAccess(false)
   }
-  useEffect(()=>{!access && navigate('/');},[access])
+  useEffect(()=>{!access && navigate('/home');},[access])  /// cambiar home a / para que funcione el login
 
   //--LANDING PAGE--//
   const [driver, setDriver] = useState(initialState)
