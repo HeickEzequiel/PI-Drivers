@@ -10,7 +10,10 @@ const getDriversByName = async (req, res) =>{
         const driverDB = await Driver.findAll({
             where:{
                 name:{
-                    [Op.iLike]: `%${name}%`
+                    forename:{
+
+                        [Op.iLike]: `%${name}%`
+                    }
                 }
             }, limit: 15
         })

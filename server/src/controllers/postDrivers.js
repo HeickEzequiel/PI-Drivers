@@ -1,29 +1,35 @@
 const { Driver , Team} = require("../db.js")
 
 const postDrivers = async (req, res) =>{
-   
+
     try{
         const {
-            name,
-            last_name,
-            description,
-            image,
+            forename,
+            surname,
+            url,
+            dob,
             nationality,
-            birthdate,
-            teams
+            teams,
+            description,
         } = req.body;
-        if(name && last_name && description && image && nationality && birthdate && teams){
+            
+        if(forename && surname && url!==undefined && dob && nationality && teams && description!==undefined){
             const newDriver = await Driver.findOrCreate({
                 where:{
-                    name,
-                    last_name,
-                    description,
-                    image,
+                    name:{
+                        forename,
+                        surname
+                    },
+                    image:{
+                        url
+                    },
+                    dob,
                     nationality,
-                    birthdate,
-                    teams
+                    teams,
+                    description,
                 }
             })
+            console.log(req.body.teams)
             const bringTeams = await Team.findAll({
                 where:{
                     name : req.body.teams
@@ -36,15 +42,14 @@ const postDrivers = async (req, res) =>{
             const driverTeamObj = driverTeam.pop()
             
             const finalDriver = [...newDriver, ...driverTeamObj]
-            
-          
-            
-            
-        return res.status(200).json(finalDriver)
-        
-            
+            return res.status(200).json(finalDriver)
         }
         return res.status(400).send("Datos incorrectos")
+            
+  //no olvidar cargar la base de datos de teams antes de crear el conductor o va a tirar error          
+            
+        
+            
     }catch (error){
         return res.status(500).send(error.message)
     }

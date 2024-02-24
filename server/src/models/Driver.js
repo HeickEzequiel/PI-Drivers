@@ -10,18 +10,14 @@ module.exports = (sequelize) => {
       primaryKey: true
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.JSON,
       allowNull: false,
     },
-    last_name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    description:{
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     image: {
+      type: DataTypes.JSON,
+      allowNull: true
+    },
+    dob: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -29,14 +25,14 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    birthdate: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     teams:{
       type: DataTypes.STRING,
       allowNull:false
-    }
+    },
+    description:{
+      type: DataTypes.STRING,
+      allowNull: true
+    },
 
   }, { timestamps: false});
 };
