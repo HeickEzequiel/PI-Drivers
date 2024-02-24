@@ -9,13 +9,16 @@ import Cards from './components/cards/Cards';
 import Details from './components/details/Details';
 import Search from './components/search/Search';
 import Newdriver from './components/newdriver/Newdriver.jsx'
+import { useDispatch } from 'react-redux';
+import { loadDrivers } from './redux/actions.js';
 
 
 
 function App() {
-  const initialState = []
+  
   const navigate = useNavigate()
   const location = useLocation()
+  const dispatch = useDispatch()
 
   //--LOGIN--//
   const [access, setAccess] = useState(false)
@@ -39,36 +42,37 @@ function App() {
     setAccess(false)
   }
   useEffect(()=>{!access && navigate('/home');},[access])  /// cambiar home a / para que funcione el login
-
+  
   //--LANDING PAGE--//
-  const [driver, setDriver] = useState(initialState)
+  const [driver, setDriver] = useState([])
   async function drivers (){
     try {
       const {data} = await axios ('http://localhost:3001/home')
-      const drv = data.map(({id, name, last_name, description, image, nationality, birthdate, teams}) =>
-      ({id, name, last_name, description, image, nationality, birthdate, teams}))
+      const drv = data.map(({id, name, description, image, nationality, dob, teams}) =>
+      ({id, name, description, image, nationality, dob, teams}))
       if(drv.length>0){
-        setDriver([...driver, ...drv])
+        setDriver(drv)
       }else{
         alert('No existen conductores')
       }
     } catch (error) {
-        alert(error.message)
+      alert(error.message)
     }
   }
-  useEffect(()=>{drivers()},[])
-
+  
+  
+  
   //--SEARCH--//
-  const [drvs, setDrvs] = useState(initialState)
+  const [drvs, setDrvs] = useState([])
   async function onSearch(name){
     try {
-      const driverName = drvs.filter((driver)=> driver.name === name)
-      if(driverName.length){
-        return alert('El conductor ya existe')
-      }
+      // const driverName = drvs.filter((driver)=> driver.name === name)
+      // if(driverName.length){
+      //   return alert('El conductor ya existe')
+      // }
       const {data} = await axios(`http://localhost:3001/drivers?name=${name}`)
-      const drvName = data.map(({id, name, last_name, description, image, nationality, birthdate, teams}) =>
-      ({id, name, last_name, description, image, nationality, birthdate, teams}))
+      const drvName = data.map(({id, name,  description, image, nationality, dob, teams}) =>
+      ({id, name, description, image, nationality, dob, teams}))
       if(drvName.length){
         setDrvs([...drvs, ...drvName])
         navigate("/search")
@@ -79,6 +83,35 @@ function App() {
       alert(error.message)
     }
   }
+  
+  //--TEAMS--//
+  const [teams, setTeams] = useState([])
+  async function getTeams(){
+    try {
+      const {data} = await axios ('http://localhost:3001/teams')
+      const tms = data.map(({id, name})=>({id, name}))
+      if(tms.length>0){
+        setTeams(tms)
+      }else{
+        alert('No existen equipos')
+      }
+    } catch (error) {
+      
+    }
+  }
+  
+  ///////////////////////////////////////////////////////
+  
+  useEffect(() => {dispatch(loadDrivers(driver))});
+  useEffect(() => {
+    const fetchData = async () => {
+      await drivers();
+      await getTeams();
+      
+    };
+    fetchData();
+  }, []);
+  
   return(
     <div>
       {
@@ -97,7 +130,7 @@ function App() {
           />
         <Route
           path="/home"
-          element={<Cards driver = {driver}/>}
+          element={<Cards teams ={teams} driver = {driver}/>}
           />
         <Route
           path="/drivers/:id"

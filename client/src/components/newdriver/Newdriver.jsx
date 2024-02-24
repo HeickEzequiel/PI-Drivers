@@ -7,13 +7,13 @@ function Newdriver(props){
     const navigate = useNavigate()
 
     const [driver, setDriver] = useState({
-        name:"",
-        last_name:"",
-        description:"",
-        image:"",
-        nationality:"",
-        birthdate:"",
-        teams:"",
+      forename:"",
+      surname:"",  
+      url:"",
+      dob:"",
+      nationality:"",
+      teams:"",
+      description:"",
     })
     
     const handleChange = (event) =>{
@@ -43,120 +43,77 @@ function Newdriver(props){
     };
 
     return(
-        <div>
-          <form onSubmit={handleSubmit} >
-            <label style={{color: "white"}}>Nombre: </label>
-              <input 
-                type='text'
-                key="name"
-                name= "name"
-                value={driver.name}
-                placeholder="Ingresar nombre"
-                onChange={handleChange}
-            />
-            
-            <br/>
-            <label style={{color: "white"}}>Apellido: </label>
-              <input 
-                type='text'
-                key="last_name"
-                name= "last_name"
-                value={driver.last_name}
-                placeholder="Ingresar nombre"
-                onChange={handleChange}
-            />
-            
-            <br/>
-            <label style={{color: "white"}}>Descripción: </label>
-              <input
-                type='text'
-                key="description"
-                name= "description"
-                value={driver.description}
-                placeholder="Ingresar descripción"
-                onChange={handleChange}
-            />
-            <br/>
-            
-            <label style={{color: "white"}}>Imagen: </label>
-              <input 
-                type='url'
-                key="image"
-                name= "image"
-                value={driver.image}
-                placeholder="Ingresar link la imagen"
-                onChange={handleChange}
-            />
-            <br/>
-            
-            <label style={{color: "white"}}>Nacionalidad: </label>
-              <input 
-                type='text'
-                key="nationality"
-                name= "nationality"
-                value={driver.nationality}
-                placeholder="Ingresar Nacionalidad"
-                onChange={handleChange}
-            />
-            <br/>
-            
-            <label style={{color: "white"}}>Fecha de nacimiento: </label>
-              <input
-                type='date'
-                key="birthdate"
-                name= "birthdate"
-                value={driver.birthdate}
-                placeholder="Ingresar fecha de nacimineto"
-                onChange={handleChange}
-            />
-            
-            
-            
-            <br/>            
-            
-            <label style={{color: "white"}}>Escuderia: </label>
-              <input 
-                type='text'
-                key="teams"
-                name= "teams"
-                value={driver.teams}
-                placeholder="Ingresar escuderia"
-                onChange={handleChange}
-            />
-            
-            <br/>
-            
-            
-            <button 
-              className={styles.button}
-              type="submit" > Guardar conductor! 
-            </button>
+      <div>
+        <form onSubmit={handleSubmit} >
+          <label style={{color: "white"}}>Nombre: </label>
+            <input 
+              type='text'
+              key="forename"
+              name= "forename"
+              value={driver.forename}
+              placeholder="Ingresar nombre"
+              onChange={handleChange}/>
+        <br/>
+          <label style={{color: "white"}}>Apellido: </label>
+            <input 
+              type='text'
+              key="surname"
+              name= "surname"
+              value={driver.surname}
+              placeholder="Ingresar nombre"
+              onChange={handleChange}/>
+        <br/>
+          <label style={{color: "white"}}>Imagen: </label>
+            <input 
+              type='url'
+              key="url"
+              name= "url"
+              value={driver.url}
+              placeholder="Ingresar link la imagen"
+              onChange={handleChange}/>
+        <br/>
+          <label style={{color: "white"}}>Fecha de nacimiento: </label>
+            <input
+              type='date'
+              key="dob"
+              name= "dob"
+              value={driver.dob}
+              placeholder="Ingresar fecha de nacimineto"
+              onChange={handleChange}/>
+        <br/>
+          <label style={{color: "white"}}>Nacionalidad: </label>
+            <input 
+              type='text'
+              key="nationality"
+              name= "nationality"
+              value={driver.nationality}
+              placeholder="Ingresar Nacionalidad"
+              onChange={handleChange}/>
+        <br/>
+          <label style={{color: "white"}}>Escuderia: </label>
+            <input 
+              type='text'
+              key="teams"
+              name= "teams"
+              value={driver.teams}
+              placeholder="Ingresar escuderia"
+              onChange={handleChange}/>
+        <br/>
+          <label style={{color: "white"}}>Descripción: </label>
+            <input
+              type='text'
+              key="description"
+              name= "description"
+              value={driver.description}
+              placeholder="Ingresar descripción"
+              onChange={handleChange}/>
+        <br/>
+          <button 
+            className={styles.button}
+            type="submit" > Guardar conductor! 
+          </button>
         </form>
-    </div>
+      </div>
     )
-}
+  }
 export default Newdriver
-
-// //name: {
-//   type: DataTypes.STRING,
-//   allowNull: false,
-// },
-// last_name: {
-//   type: DataTypes.STRING,
-//   allowNull: false
-// },
-// description:{
-//   type: DataTypes.TEXT,
-//   allowNull: false
-// },
-// image: {
-//   type: DataTypes.STRING,
-//   allowNull: false
-// },
-// nationality: {
-//   type: DataTypes.STRING,
-//   allowNull: false
-// },
-// birthdate: {
-//   type: DataTypes.STRING,
-//   allowNull: false
