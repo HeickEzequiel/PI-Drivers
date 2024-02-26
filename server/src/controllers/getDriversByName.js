@@ -23,7 +23,12 @@ const getDriversByName = async (req, res) =>{
         const combinedDrivers = [...driverDB, ...drivers].map(
             ({id, name, image, dob, nationality, teams, description}) =>
             ({id, name, image, dob, nationality, teams, description})
-        )
+        ) 
+        for(let i=0; combinedDrivers.length>i; i++){
+            if(combinedDrivers[i].image.url === ""){
+                combinedDrivers[i].image.url = "https://media.istockphoto.com/id/109215640/es/vector/piloto-de-coches-de-carrera.jpg?s=612x612&w=0&k=20&c=DfxGsueT0CGKCwVb3aMIRto0b3kaFyV44aLOc-icZOY="
+            }
+        }
         return combinedDrivers.length > 0 
             ? res.json(combinedDrivers) 
             : res.status(404).send(`No se encontraron conductores con el nombre "${name}".`)
