@@ -29,11 +29,11 @@ function Cards ({teams, driver}){
         dispatch(orderCards(event.target.value));
         }
 
-    return <div className={styles.container} >
+    return <div>
 
         <div className={styles.filters}>
             <select name="filter" onChange={handleFilter}>
-            <option value = "all"> Todos los equipos </option>       
+            <option className = {styles.option} value = "all"> Todos los equipos </option>       
             {teams.map((team, key) => (
             <option 
                 key={key}
@@ -57,7 +57,7 @@ function Cards ({teams, driver}){
             </select>
         </div>
 
-
+         <div className={styles.cards}>
         {
 
             !driverSlice.length
@@ -76,11 +76,14 @@ function Cards ({teams, driver}){
                 />
             ))
         }
-    <Pag 
-        setCurrentPage = {setCurrentPage}
-        currentPage = {currentPage}
-        pages = {pages} 
-    />
+        </div>
+
+
+        <div className={styles.pag}>
+    <Pag setCurrentPage = {setCurrentPage} currentPage = {currentPage} pages = {pages} />
+        </div>
+
+
     </div>
 
 }

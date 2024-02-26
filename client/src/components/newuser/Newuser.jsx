@@ -53,8 +53,8 @@ function Newuser (props){
   };
 
   return(
-    <div>
-      <form onSubmit={handleSubmit} >
+    <div className={styles.container}>
+      <form className={styles.form} onSubmit={handleSubmit} >
         <label style={{color: "white"}}>Nombre: </label>
           <input type='text'
                key="name"

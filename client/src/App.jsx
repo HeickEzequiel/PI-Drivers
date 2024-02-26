@@ -4,7 +4,7 @@ import './App.css'
 import axios from "axios"
 import Nav from './components/nav/Nav';
 import Form from './components/form/Form';
-import Newuser from './components/newUser/NewUser';
+import Newuser from './components/newuser/Newuser';
 import Cards from './components/cards/Cards';
 import Details from './components/details/Details';
 import Search from './components/search/Search';
@@ -41,7 +41,7 @@ function App() {
   function logout(){
     setAccess(false)
   }
-  useEffect(()=>{!access && navigate('/home');},[access])  /// cambiar home a / para que funcione el login
+  useEffect(()=>{!access && navigate('/');},[access])  /// cambiar / a home para que saltear el login
   
   //--LANDING PAGE--//
   const [driver, setDriver] = useState([])
@@ -63,13 +63,11 @@ function App() {
   
   
   //--SEARCH--//
-  const [drvs, setDrvs] = useState([])
+  let [drvs, setDrvs] = useState([])
   async function onSearch(name){
+    drvs = []
     try {
-      // const driverName = drvs.filter((driver)=> driver.name === name)
-      // if(driverName.length){
-      //   return alert('El conductor ya existe')
-      // }
+
       const {data} = await axios(`http://localhost:3001/drivers?name=${name}`)
       const drvName = data.map(({id, name,  description, image, nationality, dob, teams}) =>
       ({id, name, description, image, nationality, dob, teams}))

@@ -1,4 +1,4 @@
-import Searchbar from "../searchBar/SearchBar";
+import Searchbar from "../searchbar/Searchbar";
 import { Link } from "react-router-dom";
 import styles from "./Nav.module.css"
 
@@ -7,8 +7,8 @@ import styles from "./Nav.module.css"
     return (
        <div className={styles.body}>
          <Searchbar onSearch = {props.onSearch}/>
-         <button className={styles.button}><Link to= '/home'>Home</Link> </button>
-         <button className={styles.button}><Link to= '/newdriver'>Añadir conductor</Link></button>
+         <button className={styles.buttonhome}><Link to= '/home'>Home</Link> </button>
+         <button className={styles.button}><Link to= '/newdriver'>Crear conductor</Link></button>
          <button className={styles.logout} onClick={props.logout} >Desconectarse ❌</button>
        
        </div>

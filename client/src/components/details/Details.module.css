@@ -1,0 +1,23 @@
+.container{
+    background: linear-gradient(to right,orangered 10%, darkred 90%);
+    margin: 15px;
+    padding: 10px;
+    border-radius: 50px;
+    font-family: cursive;
+    font-size: 15px;
+    width: 1000px;
+    height:fit-content;
+    border: 5px solid lightsalmon;
+    position: absolute;
+    left: 300px;
+    top: 100px;
+}
+
+.container img{
+     
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border: 5px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+}

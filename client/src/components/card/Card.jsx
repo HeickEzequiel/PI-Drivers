@@ -10,9 +10,8 @@ function Card(props){
                     className={styles.container.img} 
                     src = {props.image}/>
             </Link>
-            <h1>{props.name}</h1>
-            <h1>{props.last_name}</h1> 
-            <h1>{props.teams}</h1>
+            <h1>{props.name} {props.last_name}</h1> 
+            <h1>Escuderias: {props.teams}</h1>
         </div>
     )
 }

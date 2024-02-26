@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link} from "react-router-dom"
 import styles from "./Newdriver.module.css"
 function Newdriver(props){
     
@@ -43,8 +43,10 @@ function Newdriver(props){
     };
 
     return(
-      <div>
-        <form onSubmit={handleSubmit} >
+    <div>
+      <button className={styles.buttonhome}><Link to= '/home'>Home</Link> </button>
+      <div className={styles.container}>
+        <form className={styles.form} onSubmit={handleSubmit} >
           <label style={{color: "white"}}>Nombre: </label>
             <input 
               type='text'
@@ -114,6 +116,7 @@ function Newdriver(props){
           </button>
         </form>
       </div>
+    </div>
     )
   }
 export default Newdriver

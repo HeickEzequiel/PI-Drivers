@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import styles from "./Details.module.css"
 
 function Details(props){
     const {id} = useParams()
@@ -20,9 +21,9 @@ function Details(props){
         },[id]);
         
     return(
-        <div>
+        <div className={styles.container} >
             <h1>{driver.forename} {driver.surname}</h1>
-            <img src = {driver.image} alt = {driver.name}/>
+            <img  className={styles.container.img} src = {driver.image} alt = {driver.name}/>
             <h3>Fecha de nacimiento: {driver.dob}</h3>
             <h3>Nacionalidad: {driver.nationality}</h3>
             <h3>Escuderias: {driver.teams}</h3>

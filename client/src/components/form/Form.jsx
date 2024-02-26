@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import validation from "../../utils/validation.js"
+import styles from "./Form.module.css"
 
 function Form(props){
 
@@ -39,7 +40,12 @@ function Form(props){
 
 return(
     <div>
-        <form onSubmit={handleSubmit} >
+        <div className={styles.welcome}> Bienvenido a la app de drivers, proyecto individual 
+      de Henry creada por Ezequiel Heick.</div>
+     <div className={styles.log}> por favor ingresa tu usuario y contraseña para acceder o crea
+      un nuevo usuario</div>
+    <div className={styles.container}>
+        <form className={styles.form} onSubmit={handleSubmit} >
             <label >Email: </label>
                 <input 
                     type='text'
@@ -62,15 +68,16 @@ return(
                 />
             <p>{ errors.password && errors.password }</p>
         <br />
-            <button
+            <button className={styles.button}
                 type="submit"
                 disabled={ errors.email || errors.password }
                 >Ingresar</button>
-            <button      
+            <button className={styles.button}     
                 type="button"
                 onClick={handleNewUser}>
                 Crear nuevo usuario</button>
         </form>
+    </div>
     </div>
     )
 }

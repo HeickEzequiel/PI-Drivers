@@ -1,0 +1,71 @@
+.container{
+    background-color:transparent;
+    background-size:100vh;
+    background-position: center;
+    border: 1px solid white;
+    border-radius: 50px;
+    display: grid;
+    place-items: center;
+    position:absolute;
+    top: 50px;
+    bottom: 300px;
+    left: 1300px;
+    right: 0px;
+ 
+}
+
+.form{
+    margin: 10px;
+    display:contents;
+    gap: 8px; 
+    
+}
+.form :is(input, button) {
+    width: 60%;
+    height: 30px;
+    border-radius: 28px;
+    font-size: 16px;
+    font-family: inherit;
+    border: 1px solid white;
+    
+  }
+  .form > input {
+    border: 5px;
+    padding: 2px;
+    color: #222222;
+    background: #ededed;
+  }
+  .form > input::placeholder {
+    color: rgb(0 0 0 / 28%);
+  }
+  
+  .button {
+    color: #f9f9f9;
+    background: red;
+    display: grid;
+    place-items: center;
+    font-weight: 500;
+    cursor: pointer;
+
+    
+  }
+  .button:hover {
+    background-color: orangered;
+    border-color: black;
+    color: black;
+    border: 1px solid white;
+  }
+  .welcome{
+    position: absolute;
+    top:150px;
+    font-size: 28px;
+    color: lightsalmon;
+    font-weight: bold;
+  }
+  .log{
+    position: absolute;
+    top:200px;
+    font-size: 28px;
+    color: lightsalmon;
+    font-weight: bold;
+  }

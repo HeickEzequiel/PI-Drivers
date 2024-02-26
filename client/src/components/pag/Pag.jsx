@@ -12,11 +12,9 @@ const Pag = ({ pages, currentPage, setCurrentPage}) =>{
 
     return(
         <div className={styles.container}>
-            <button className={styles.button} onClick={prev}>Prev</button>
-                <h3 className={styles.text}>
-                    {currentPage} / {pages}
-                </h3>
-            <button className={styles.button} onClick={next}>Next</button>
+            <button className={styles.buttonPrev} onClick={prev}>Prev</button>
+            <h3 className={styles.text}>{currentPage} / {pages}</h3>
+            <button className={styles.buttonNext} onClick={next}>Next</button>
         </div>
         )
 }

@@ -24,7 +24,7 @@ function Searchbar(props) {
             id= "search"
             onChange = {handleChange}
             value={name} />
-         <button className={styles.button} onClick={handleClick} >Agregar</button>
+         <button className={styles.button} onClick={handleClick} >Buscar</button>
       </div>
    );
 }

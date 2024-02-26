@@ -35,23 +35,19 @@ function reducer(state = initialState,{ type, payload }){
       const { originFilter } = payload;
     
       if (originFilter === undefined || originFilter === 'all') {
-        // No se aplica filtro por origen, mostrar todos los conductores
         return {
           ...state,
           drivers: state.allDrivers
         };
       }
-    
-      const filteredDrivers = state.allDrivers.filter(driver => {
-        if (originFilter === 'api') {
-          // Filtrar conductores de la API (asumiendo que los de la API tienen un identificador numérico)
+    const filteredDrivers = state.allDrivers.filter(driver => {
+      console.log(driver.id) 
+      if (originFilter === 'api') {
           return typeof driver.id === 'number';
         } else if (originFilter === 'database') {
-          // Filtrar conductores de la base de datos (asumiendo que los de la base de datos tienen un identificador UUID)
-          return typeof driver.id === 'string';
+            return typeof driver.id === 'string';
         }
-    
-        return false; // Manejar otros casos si es necesario
+        return false;
       });
     
       return {
