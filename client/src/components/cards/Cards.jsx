@@ -28,7 +28,7 @@ function Cards ({teams, driver}){
     const handleOrder = event => {
         dispatch(orderCards(event.target.value));
         }
-
+console.log(teams)
     return <div>
 
         <div className={styles.filters}>

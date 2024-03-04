@@ -2,8 +2,11 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate, Link} from "react-router-dom"
 import styles from "./Newdriver.module.css"
+import driverValidation from "../../utils/driverValidation"
+
+
 function Newdriver(props){
-    
+    const {teams} = props
     const navigate = useNavigate()
 
     const [driver, setDriver] = useState({
@@ -12,15 +15,31 @@ function Newdriver(props){
       url:"",
       dob:"",
       nationality:"",
-      teams:"",
+      team1:"",
+      team2:"",
+      team3:"",
       description:"",
     })
-    
-    const handleChange = (event) =>{
-        const {name, value} = event.target
-        setDriver({...driver, [name]:value})
-    }
 
+          
+    const [errors, setErrors] = useState({
+      forename: "Ingrese nombre",
+      surname: "Ingrese apellido",
+      nationality: "Ingrese nacionalidad",
+      dob:"Ingrese fecha de nacimiento"
+      
+    })
+
+
+    const handleChange = (event) =>{
+
+      const {name, value} = event.target
+      console.log(name, value)
+        setDriver({...driver, [name]:value})
+        setErrors({ ...errors, [name]: driverValidation({ ...driver, [name]: value })[name] });
+      
+    }
+ console.log(driver)
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -37,10 +56,23 @@ function Newdriver(props){
           } else {
             alert('Error al guardar nuevo conductor: ' + response.statusText);
             }
+            
         }catch (error) {
           console.error('Error al realizar la solicitud:', error);
         }
+    
     };
+
+    // const generateTeamOptions = () => {
+    //   return teams.map((team, key) => (
+    //     <option key={key} value={driver.teams}>
+    //       {team.name}
+    //       {console.log(team.name)}
+    //     </option>
+    //   ));
+    // };
+
+
 
     return(
     <div>
@@ -55,6 +87,7 @@ function Newdriver(props){
               value={driver.forename}
               placeholder="Ingresar nombre"
               onChange={handleChange}/>
+              <p style={{color: "red"}}>{ errors.forename ? errors.forename : null }</p>
         <br/>
           <label style={{color: "white"}}>Apellido: </label>
             <input 
@@ -62,8 +95,9 @@ function Newdriver(props){
               key="surname"
               name= "surname"
               value={driver.surname}
-              placeholder="Ingresar nombre"
+              placeholder="Ingresar apellido"
               onChange={handleChange}/>
+              <p style={{color: "red"}}>{ errors.surname ? errors.surname : null }</p>
         <br/>
           <label style={{color: "white"}}>Imagen: </label>
             <input 
@@ -82,6 +116,7 @@ function Newdriver(props){
               value={driver.dob}
               placeholder="Ingresar fecha de nacimineto"
               onChange={handleChange}/>
+              <p style={{color: "white"}}>{ errors.dob ? errors.dob : null }</p>
         <br/>
           <label style={{color: "white"}}>Nacionalidad: </label>
             <input 
@@ -92,15 +127,7 @@ function Newdriver(props){
               placeholder="Ingresar Nacionalidad"
               onChange={handleChange}/>
         <br/>
-          <label style={{color: "white"}}>Escuderia: </label>
-            <input 
-              type='text'
-              key="teams"
-              name= "teams"
-              value={driver.teams}
-              placeholder="Ingresar escuderia"
-              onChange={handleChange}/>
-        <br/>
+        <p style={{color: "red"}}>{ errors.nationality ? errors.nationality : null }</p>
           <label style={{color: "white"}}>Descripción: </label>
             <input
               type='text'
@@ -110,9 +137,55 @@ function Newdriver(props){
               placeholder="Ingresar descripción"
               onChange={handleChange}/>
         <br/>
+        <select name="team1" onChange={handleChange}>
+            <option  value="">
+              Seleccione una escudería
+            </option>
+            <option  value="">
+              Ninguna
+            </option>
+            {teams.map((team, key) => (
+            <option 
+                key={key}
+                value={team.name}>{team.name}
+            </option>))}
+            </select>
+          <br />
+        <select name="team2" onChange={handleChange}>
+            <option  value="">
+              Seleccione una escudería
+            </option>
+            <option  value="">
+              Ninguna
+            </option>
+            {teams.map((team, key) => (
+            <option 
+                key={key}
+                value={team.name}>{team.name}
+            </option>))}
+            </select>
+          <br />
+        <select name="team3" onChange={handleChange}>
+            <option  value="">
+              Seleccione una escudería
+            </option>
+            <option  value="">
+              Ninguna
+            </option>
+            {teams.map((team, key) => (
+            <option 
+                key={key}
+                value={team.name}>{team.name}
+            </option>))}
+            </select>
+          <br />
+      
+        <br/>
           <button 
             className={styles.button}
-            type="submit" > Guardar conductor! 
+            type="submit" 
+            > 
+            Guardar conductor! 
           </button>
         </form>
       </div>

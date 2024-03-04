@@ -41,7 +41,7 @@ function App() {
   function logout(){
     setAccess(false)
   }
-  useEffect(()=>{!access && navigate('/');},[access])  /// cambiar / a home para que saltear el login
+  useEffect(()=>{!access && navigate('/home');},[access])  /// cambiar / a home para que saltear el login
   
   //--LANDING PAGE--//
   const [driver, setDriver] = useState([])
@@ -78,7 +78,7 @@ function App() {
         alert('No hay conductores con ese nombre!')
       }
     } catch (error) {
-      alert(error.message)
+      alert('No hay conductores con ese nombre!')
     }
   }
   
@@ -140,7 +140,7 @@ function App() {
             />
         <Route
           path="/newdriver"
-          element={<Newdriver/>}
+          element={<Newdriver teams = {teams}/>}
             />
 
       </Routes>
