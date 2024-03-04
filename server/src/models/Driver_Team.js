@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
     },
     TeamId:{
         type: DataTypes.INTEGER,
-        unique: true
+        
     }
    
   }, { timestamps: false});

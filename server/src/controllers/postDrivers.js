@@ -9,10 +9,13 @@ const postDrivers = async (req, res) =>{
             url,
             dob,
             nationality,
-            teams,
+            team1, 
+            team2, 
+            team3, 
             description,
         } = req.body;
             
+        const teams = `${team1},${team2},${team3}`
         if(forename && surname && url!==undefined && dob && nationality && teams && description!==undefined){
             const newDriver = await Driver.findOrCreate({
                 where:{
@@ -29,18 +32,44 @@ const postDrivers = async (req, res) =>{
                     description,
                 }
             })
-            console.log(req.body.teams)
-            const bringTeams = await Team.findAll({
+            console.log(newDriver)
+
+
+
+
+            const bringTeams1 = await Team.findAll({
                 where:{
-                    name : req.body.teams
+                    name : req.body.team1,
+              
                 }
             })
-            const idTeams = bringTeams.map((Team)=>Team.id)
-            const driverTeam = await newDriver[0].setTeams(idTeams)
+            const bringTeams2 = await Team.findAll({
+                where:{
+                   
+                    name : req.body.team2,
+                   
+                }
+            })
+            const bringTeams3 = await Team.findAll({
+                where:{
+
+                    name : req.body.team3
+                }
+            })
+            const idTeams1 = bringTeams1.map((Team)=>Team.id)
+            const idTeams2 = bringTeams2.map((Team)=>Team.id)
+            const idTeams3 = bringTeams3.map((Team)=>Team.id)
+            const driverTeam1 = await newDriver[0].setTeams(idTeams1)
+            const driverTeam2 = await newDriver[0].setTeams(idTeams2)
+            const driverTeam3 = await newDriver[0].setTeams(idTeams3)
             
             newDriver.pop()
-            const driverTeamObj = driverTeam.pop()
+
+            const driverTeamObj1 = driverTeam1.pop()
+            const driverTeamObj2 = driverTeam2.pop()
+            const driverTeamObj3 = driverTeam3.pop()
             
+            const driverTeamObj = [...driverTeamObj1, ...driverTeamObj2, ...driverTeamObj3]
             const finalDriver = [...newDriver, ...driverTeamObj]
             return res.status(200).json(finalDriver)
         }
