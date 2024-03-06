@@ -4,7 +4,7 @@ const MAX_NATIONALITY_LENGTH = 25;
 
 function driverValidation(input) {
   const errors = {};
-  const regexAlphabetic = new RegExp(/[a-zA-Z]+/g);
+  const regexAlphabetic = new RegExp(/^[a-zA-Z]+$/);
 
   if (!input.forename.length) {
     errors.forename = "Ingrese el nombre del conductor";
@@ -44,8 +44,8 @@ function driverValidation(input) {
   const selectedDate = new Date(input.dob)
   console.log(selectedDate)
   const ageIndays = Math.floor((currentDate - selectedDate) / (24*60*60*1000))
-  console.log(ageIndays)
-    if(ageIndays < 18*365){
+  console.log(ageIndays) 
+  if(ageIndays < 18*365){
         errors.dob = "El conductor debe ser mayor de edad"
     }
   

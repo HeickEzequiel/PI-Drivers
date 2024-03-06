@@ -21,14 +21,17 @@ function Cards ({teams, driver}){
 
     const handleFilter = (event) => {
         dispatch(filterTeam(event.target.value));
+        setCurrentPage(1)
       };
     const handleFilterDB = (event) => {
         dispatch(filterDB(event.target.value));
+        setCurrentPage(1)
       };
     const handleOrder = event => {
         dispatch(orderCards(event.target.value));
+        setCurrentPage(1)
         }
-console.log(teams)
+
     return <div>
 
         <div className={styles.filters}>
@@ -42,14 +45,15 @@ console.log(teams)
             </select>
 
             <select name = "filterdb" onChange={handleFilterDB}>
+                <option value="all">Mostrar todos</option>
                 <option value="api"> Conductores api</option>
                 <option value="database">Conductores Base de datos</option>
-                <option value="all">Mostrar todos</option>
 
             </select>
 
 
             <select name="order" onChange={handleOrder}>
+               <option value="O">Ordenamientos</option>
                <option value="A">Ascendente por orden alfabetico</option>
                <option value="D">Descendente por orden alfabetico</option>
                <option value="AE">Ascendente por fecha de nacimiento</option>

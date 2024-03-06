@@ -1,6 +1,13 @@
 import { FILTERDB, FILTER_TEAM, LOAD_DRIVERS, ORDER } from "./action-types";
 
 export function loadDrivers(drivers){
+    for(let i=508; i<drivers.length; i++){
+    
+        drivers[i].teams=drivers[i].teams.toString()
+        let teamsArray = drivers[i].teams.split(',').map(team => team.trim()).filter(team => team !== '');
+        drivers[i].teams = teamsArray.join(', ');
+        console.log(drivers[i].teams)}
+    
     return{
         type: LOAD_DRIVERS,
         payload: drivers

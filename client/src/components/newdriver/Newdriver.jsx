@@ -23,10 +23,10 @@ function Newdriver(props){
 
           
     const [errors, setErrors] = useState({
-      forename: "Ingrese nombre",
-      surname: "Ingrese apellido",
-      nationality: "Ingrese nacionalidad",
-      dob:"Ingrese fecha de nacimiento"
+      forename: "",
+      surname: "",
+      nationality: "",
+      dob:""
       
     })
 
@@ -35,47 +35,51 @@ function Newdriver(props){
 
       const {name, value} = event.target
       console.log(name, value)
-        setDriver({...driver, [name]:value})
-        setErrors({ ...errors, [name]: driverValidation({ ...driver, [name]: value })[name] });
+      setDriver({...driver, [name]:value})
+      setErrors({ ...errors, [name]: driverValidation({ ...driver, [name]: value })[name] });
       
     }
- console.log(driver)
+    console.log(driver)
     const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-          const response = await axios.post(
-            'http://localhost:3001/newdriver', driver,{
-              headers:{
-                'Content-Type': 'application/json',
-              },
-            }
+      event.preventDefault();
+      if (!driver.forename || !driver.surname || !driver.dob || !driver.nationality || !driver.team1) {
+        alert("Por favor completar todos los campos y seleccionar al menos la primer escuderia");
+        return;
+    }
+      try {
+        const response = await axios.post(
+          'http://localhost:3001/newdriver', driver,{
+            headers:{
+              'Content-Type': 'application/json',
+            },
+          }
           );
           if (response.status === 200) {
-          alert('Nuevo conductor creado con éxito');
+            alert('Nuevo conductor creado con éxito');
           navigate("/home");
-          } else {
-            alert('Error al guardar nuevo conductor: ' + response.statusText);
-            }
-            
-        }catch (error) {
-          console.error('Error al realizar la solicitud:', error);
+        } else {
+          alert('Error al guardar nuevo conductor');
         }
-    
+        
+      }catch (error) {
+        console.error('Error al realizar la solicitud:', error);
+        alert('Error al guardar nuevo conductor')
+      }
+      
     };
-
-    // const generateTeamOptions = () => {
-    //   return teams.map((team, key) => (
-    //     <option key={key} value={driver.teams}>
-    //       {team.name}
-    //       {console.log(team.name)}
-    //     </option>
-    //   ));
-    // };
-
-
-
+    
+    
+    const isButtonDisabled = () => {
+      if(errors.forename === "No debe contener números ni caracteres especiales" || errors.surname ==="No debe contener números ni caracteres especiales"||errors.nationality ==="No debe contener números ni caracteres especiales"||errors.dob==="El conductor debe ser mayor de edad"){
+        return true
+      }else{
+        return false
+      }
+    };
+    console.log(isButtonDisabled())
+    
     return(
-    <div>
+      <div>
       <button className={styles.buttonhome}><Link to= '/home'>Home</Link> </button>
       <div className={styles.container}>
         <form className={styles.form} onSubmit={handleSubmit} >
@@ -137,6 +141,7 @@ function Newdriver(props){
               placeholder="Ingresar descripción"
               onChange={handleChange}/>
         <br/>
+        
         <select name="team1" onChange={handleChange}>
             <option  value="">
               Seleccione una escudería
@@ -149,8 +154,10 @@ function Newdriver(props){
                 key={key}
                 value={team.name}>{team.name}
             </option>))}
-            </select>
+        </select>
+
           <br />
+
         <select name="team2" onChange={handleChange}>
             <option  value="">
               Seleccione una escudería
@@ -163,8 +170,10 @@ function Newdriver(props){
                 key={key}
                 value={team.name}>{team.name}
             </option>))}
-            </select>
+        </select>
+
           <br />
+
         <select name="team3" onChange={handleChange}>
             <option  value="">
               Seleccione una escudería
@@ -177,14 +186,16 @@ function Newdriver(props){
                 key={key}
                 value={team.name}>{team.name}
             </option>))}
-            </select>
-          <br />
+        </select>
+        
       
         <br/>
+
           <button 
-            className={styles.button}
+            className={`${styles.button} ${isButtonDisabled() ? styles.disabledButton : ''}`}
             type="submit" 
-            > 
+            disabled={isButtonDisabled()}
+          > 
             Guardar conductor! 
           </button>
         </form>

@@ -50,6 +50,7 @@ function App() {
       const {data} = await axios ('http://localhost:3001/home')
       const drv = data.map(({id, name, description, image, nationality, dob, teams}) =>
       ({id, name, description, image, nationality, dob, teams}))
+      
       if(drv.length>0){
         setDriver(drv)
       }else{
@@ -59,7 +60,7 @@ function App() {
       alert(error.message)
     }
   }
-  
+
   
   
   //--SEARCH--//

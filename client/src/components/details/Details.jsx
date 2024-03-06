@@ -19,7 +19,7 @@ function Details(props){
             );
             
         },[id]);
-        
+
     return(
         <div className={styles.container} >
             <h1>{driver.forename} {driver.surname}</h1>

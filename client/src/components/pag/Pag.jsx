@@ -2,7 +2,7 @@ import styles from "./Pag.module.css"
 import React from "react";
 
 const Pag = ({ pages, currentPage, setCurrentPage}) =>{
-    
+
     const next = () => {
         if(currentPage !== pages)setCurrentPage(currentPage+1)
     }

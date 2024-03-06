@@ -80,3 +80,10 @@
     border-color: black;
     color: #fff;
   }
+
+  .disabledButton {
+
+    background-color: #dddddd; 
+    color: #aaaaaa; 
+    cursor: not-allowed; 
+  }
